@@ -40,7 +40,7 @@ int main(int argc, char** argv){
         return 0;
     }
     
-    std::vector<std::vector<int>> map (size, (std::vector<int> (size,100))); // Create a square array
+    std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
     hilbert(map, size, iterations, 0, 0);
 
     // File output generation
@@ -48,9 +48,9 @@ int main(int argc, char** argv){
     outfile << "P3" << std::endl;
     outfile << size << " " << size << std::endl;
     outfile << "255" << std::endl;
-    for(double i=0; i < size; i++){
-        for(double j = 0; j < size; j++){
-            outfile << 0 << " " << 0 << " " << map[i][j]*100 << " "; 
+    for(int i=0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            outfile << map[i][j]*100 << " " << 0 << " " << 0 << " "; 
         }
         outfile << std::endl;
     }
