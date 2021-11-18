@@ -4,26 +4,44 @@
 #include <vector>
 #include <math.h>
 
-void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int starthoriz, int startvert){
+void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int starthoriz, int startvert, int quad){
     if(iterations == 1){
-        int distance = (size-2)/3; // Set the distances from the sides of the square
+        int distance = (size-2)/4; // Set the distances from the sides of the square
         int leftin = distance+1+starthoriz; // Left start point
-        int rightin = size-distance-1+starthoriz; // Right start point
+        int rightin = 3*distance+1+starthoriz; // Right start point
         // Vertical sides
         for(int i = distance+1; i <= size-distance-1; i++){
-            array[i+startvert][rightin] = 1;
-            array[i+startvert][leftin] = 1;
+            if(quad == 1){
+                array[rightin][i+startvert] = 1;
+                array[leftin][i+startvert] = 1;
+            }
+            else if(quad == 2){
+                array[rightin-starthoriz][i+startvert+starthoriz] = 1;
+                array[leftin-starthoriz][i+startvert+starthoriz] = 1;
+            }
+            else{
+                array[i+startvert][rightin] = 1;
+                array[i+startvert][leftin] = 1;
+            }
         }
         // Horizontal base
         for(int i = leftin; i <= rightin; i++){
-            array[size-distance-1+startvert][i] = 1;
+            if(quad == 1){
+                array[i][size-distance-1+startvert] = 1;
+            }
+            else if(quad == 2){
+                array[i-size][starthoriz+distance-1] = 1;
+            }
+            else{
+                array[size-distance-1+startvert][i] = 1;
+            }
         }
     }
     else{
-        hilbert(array, size/2, iterations-1, 0, 0);
-        hilbert(array, size/2, iterations-1, size/2, 0);
-        hilbert(array, size/2, iterations-1, 0, size/2);
-        hilbert(array, size/2, iterations-1, size/2, size/2);
+        hilbert(array, size/2, iterations-1, 0, 0, 1);
+        hilbert(array, size/2, iterations-1, size/2, 0, 2);
+        hilbert(array, size/2, iterations-1, 0, size/2, 3);
+        hilbert(array, size/2, iterations-1, size/2, size/2, 4);
     }
 }
 
@@ -41,7 +59,7 @@ int main(int argc, char** argv){
     }
     
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
-    hilbert(map, size, iterations, 0, 0);
+    hilbert(map, size, iterations, 0, 0, 0);
 
     // File output generation
     std::ofstream outfile (out_fname);
