@@ -50,16 +50,13 @@ int main(int argc, char** argv){
     outfile << "255" << std::endl;
     for(double i=0; i < size; i++){
         for(double j = 0; j < size; j++){
-            outfile << map[i][j]*100  << " " << 0 << " " << 0 << " "; 
+            outfile << 0 << " " << 0 << " " << map[i][j]*100 << " "; 
         }
         outfile << std::endl;
     }
 
     outfile.close();
     
-    
-    
-
     //TEST TO OUTPUT 2D VECTOR
     /*for(double i=0; i < complete.size(); i++){
     for(double j = 0; j < complete[i].size(); j++){
