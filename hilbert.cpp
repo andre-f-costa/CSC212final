@@ -8,15 +8,15 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int
     if(iterations == 1){
         int distance = (size-2)/3; // Set the distances from the sides of the square
         int leftin = distance+1+starthoriz; // Left start point
-        int rightin = size-distance-1-starthoriz; // Right start point
+        int rightin = size-distance-1+starthoriz; // Right start point
         // Vertical sides
         for(int i = distance+1; i <= size-distance-1; i++){
-            array[i][rightin] = 1;
-            array[i][leftin] = 1;
+            array[i+startvert][rightin] = 1;
+            array[i+startvert][leftin] = 1;
         }
         // Horizontal base
         for(int i = leftin; i <= rightin; i++){
-            array[size-distance-1][i] = 1;
+            array[size-distance-1+startvert][i] = 1;
         }
     }
     else{
