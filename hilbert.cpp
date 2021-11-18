@@ -6,7 +6,7 @@
 
 void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int starthoriz, int startvert){
     if(iterations == 1){
-        int distance = (size-2)/3; // Set the distances from the sides of the square
+        int distance = (size-2)/4; // Set the distances from the sides of the square
         int leftin = distance+1+starthoriz; // Left start point
         int rightin = size-distance-1+starthoriz; // Right start point
         // Vertical sides
