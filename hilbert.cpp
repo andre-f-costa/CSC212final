@@ -33,6 +33,12 @@ int main(int argc, char** argv){
     // Input should be in format "filename.ppm size iteratons"
     std::string out_fname = argv[1]; // Get the output file name
     int size = atoi(argv[2]), iterations = atoi(argv[3]); // Set length and width of the output
+
+    // Prevent size being too large
+    if(size > 10000){
+        std::cout << "Size is too large, try again with a value <= 10,000!" << std::endl;
+        return 0;
+    }
     
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,100))); // Create a square array
     hilbert(map, size, iterations, 0, 0);
