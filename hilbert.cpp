@@ -9,6 +9,7 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     if(iterations == 2){
         NumOfBoxes = 2;
     }
+    //test
     else if(iterations > 2){
         NumOfBoxes = ((iterations-1)*(iterations-1));
     }
