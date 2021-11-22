@@ -3,34 +3,56 @@
 #include <fstream>
 #include <vector>
 #include <math.h>
+#include <cmath>
+
+void orientation(std::vector<int> &ori, int start, int size){
+    if(size == 1){
+        return;
+    }
+    int temp = size/4;
+    for(int i = start; i < temp; i++){
+        ori[i] = ori[i]-1;
+    }
+    for(int i = temp; i < 2*temp; i++){
+        ori[i] = ori[i]+1;
+    }
+    orientation(ori, 0, temp);
+    orientation(ori, temp, temp);
+    orientation(ori, 2*temp, temp);
+    orientation(ori, 3*temp, temp);
+}
 
 void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     int NumOfBoxes;
     if(iterations == 2){
         NumOfBoxes = 2;
     }
-    //test
     else if(iterations > 2){
-        NumOfBoxes = ((iterations-1)*(iterations-1));
+        NumOfBoxes = pow(2,(iterations-1));
     }
     else{
         NumOfBoxes = 1;
     }
+    std::vector<int> ori (NumOfBoxes,0);
+    orientation(ori, 0, NumOfBoxes);
     std::cout << NumOfBoxes << std::endl;
     int smallsize = size/NumOfBoxes;
     int distance = (smallsize-2)/4; // Distances into the box
     int leftin = distance+1; // Left start point
     int rightin = 3*distance+1; // Right start point
     int basein = 3*distance+1;
+    int counter = 0;
     for(int a = 0; a < NumOfBoxes; a++){
         for(int b = 0; b < NumOfBoxes; b++){
             for(int i = distance; i <= basein; i++){
-                array[i+b*smallsize][rightin+a*smallsize] = 1;
-                array[i+b*smallsize][leftin+a*smallsize] = 1;
+                array[i+b*smallsize][rightin+a*smallsize] = 1; // Rigth line
+                array[i+b*smallsize][leftin+a*smallsize] = 1;  // Left Line
             }
-            for(int j = rightin; j <= leftin; j++){
-                array[basein+a*smallsize][j+b*smallsize] = 1;
+            for(int j = leftin; j <= rightin; j++){
+                array[basein+a*smallsize][j+b*smallsize] = 1;     // Bottom Line
+                array[(basein/3)+a*smallsize][j+b*smallsize] = 1; // Top Line
             }
+            counter++;
         }
     }
     
