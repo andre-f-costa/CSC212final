@@ -137,7 +137,7 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     }
     std::cout << std::endl;*/
 
-    s_triangle(grid,row_start - (count_diagonal + 2), (count_base/4), levels, count_base/2, count_diagonal/2);  //start recursion on the lower left of the next level
+    s_triangle(grid,row_start - (count_diagonal + 2), col_start - count_base + (count_base/4), levels, count_base/2, count_diagonal/2);  //start recursion on the lower left of the next level
     count = 1;
     row_start -= 2;
     col_start++;
