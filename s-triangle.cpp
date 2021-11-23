@@ -8,19 +8,21 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
 void set_base_triangle(std::vector<std::vector<int>> * grid, int row, int col, int &count_base, int &count_diagonal);
 
 int main(int argc, char** argv){
-    int row = atoi(argv[1]); //square grid of odd value, even does not result in triangle
-    int col = atoi(argv[2]);    // input 2n x n but make it so that the program acts n x n
+    int row = atoi(argv[1]); //square grid of odd value, has to be certain grid size in order for the triangle to be equalateral
+    int col = atoi(argv[2]);    // some useable sizes are 949 x 949 , 2453 x 2453 , 5485 x 5485(takes a long time)
     int levels = atoi(argv[3]);
     std::string out_file = argv[4];
 
     std::vector<std::vector<int>> grid(row, std::vector<int> (col, 0)); // make and empty 2d array size x size of all zeros
+
+    //std::vector<std::vector<int>> level(row, std::vector<int> (col, 0));    //array to have a different color for each level
 
     int count_base = 0;      //this will hold the length of the base of the equalateral triangle
     int count_diagonal = 0; //this will hold the length of the diagonals of the equalateral triangle
 
     set_base_triangle(&grid, row, col, count_base,count_diagonal); // fill in grid with the base level triangle
 
-    std::cout << count_base << " " << count_diagonal << std::endl;
+    //std::cout << count_base << " " << count_diagonal << std::endl;
 
     /*for(int i = 0; i < grid.size(); i++){
         for(int j = 0; j < grid[i].size(); j++){
@@ -105,9 +107,9 @@ void set_base_triangle(std::vector<std::vector<int>> * grid, int row, int col, i
 }
 
 void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_start , int levels, int count_base, int count_diagonal){
-    std::cout << count_base << " " << row_start << " " << col_start << std::endl;
+    //std::cout << count_base << " " << row_start << " " << col_start << std::endl;
     if(levels == 1){
-        std::cout << "hello" << std::endl;
+        //std::cout << "hello" << std::endl;
         return;
     }
     levels--;
