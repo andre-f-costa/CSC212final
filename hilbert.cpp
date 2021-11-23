@@ -6,20 +6,96 @@
 #include <cmath>
 
 void orientation(std::vector<int> &ori, int start, int size){
+    //std::cout << size << std::endl;
+    int temp = size/4;
     if(size == 1){
         return;
     }
-    int temp = size/4;
-    for(int i = start; i < temp; i++){
-        ori[i] = ori[i]-1;
+    else{
+        for(int i = start; i < start+temp; i++){
+            ori[i] = ori[i]+3;
+        }
+        for(int i = temp; i < start+2*temp; i++){
+            ori[i] = ori[i]+1;
+        }
+        orientation(ori, 0, temp);
+        orientation(ori, temp, temp);
+        orientation(ori, 2*temp, temp);
+        orientation(ori, 3*temp, temp);
+        return;
     }
-    for(int i = temp; i < 2*temp; i++){
-        ori[i] = ori[i]+1;
+}
+
+void orientat(std::vector<std::vector<int>> &array, int size, int rotation, int startX, int startY){
+    int temp = size/2;
+    if(size == 1){
+        return;
     }
-    orientation(ori, 0, temp);
-    orientation(ori, temp, temp);
-    orientation(ori, 2*temp, temp);
-    orientation(ori, 3*temp, temp);
+    rotation = rotation%4;
+    if(rotation == 0){
+        for(int i = startY; i < temp+startY; i++){
+            for(int j = startX; j < temp+startX; j++){
+                array[i][j] += 3;
+            }
+        }
+        for(int i = startY; i < temp+startY; i++){
+            for(int j = temp+startX; j < startX+temp*2; j++){
+                array[i][j] += 1;
+            }
+        }
+        orientat(array, temp, rotation+3, startX, startY);
+        orientat(array, temp, rotation+1, startX+temp, startY);
+        orientat(array, temp, rotation, startX, startY+temp);
+        orientat(array, temp, rotation, startX+temp, startY+temp);
+    }
+    if(rotation == 1){
+        for(int i = startY; i < temp+startY; i++){
+            for(int j = startX+temp; j < temp+2*startX; j++){
+                array[i][j] += 3;
+            }
+        }
+        for(int i = startY+temp; i < temp*2+startY; i++){
+            for(int j = temp+startX; j < startX+temp*2; j++){
+                array[i][j] += 1;
+            }
+        }
+        orientat(array, temp, rotation+3, startX, startY);
+        orientat(array, temp, rotation+1, startX+temp, startY);
+        orientat(array, temp, rotation, startX, startY+temp);
+        orientat(array, temp, rotation, startX+temp, startY+temp);
+    }
+    if(rotation == 2){
+        for(int i = startY+temp; i < 2*temp+startY; i++){
+            for(int j = temp+startX; j < 2*temp+startX; j++){
+                array[i][j] += 3;
+            }
+        }
+        for(int i = startY+temp; i < temp*2+startY; i++){
+            for(int j = startX; j < startX+temp; j++){
+                array[i][j] += 1;
+            }
+        }
+        orientat(array, temp, rotation+3, startX, startY);
+        orientat(array, temp, rotation+1, startX+temp, startY);
+        orientat(array, temp, rotation, startX, startY+temp);
+        orientat(array, temp, rotation, startX+temp, startY+temp);
+    }
+    if(rotation == 3){
+        for(int i = startY+temp; i < temp*2+startY; i++){
+            for(int j = startX; j < temp+startX; j++){
+                array[i][j] += 3;
+            }
+        }
+        for(int i = startY; i < temp+startY; i++){
+            for(int j = startX; j < startX+temp; j++){
+                array[i][j] += 1;
+            }
+        }
+        orientat(array, temp, rotation+3, startX, startY);
+        orientat(array, temp, rotation+1, startX+temp, startY);
+        orientat(array, temp, rotation, startX, startY+temp);
+        orientat(array, temp, rotation, startX+temp, startY+temp);
+    }
 }
 
 void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
@@ -33,9 +109,18 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     else{
         NumOfBoxes = 1;
     }
-    std::vector<int> ori (NumOfBoxes,0);
-    orientation(ori, 0, NumOfBoxes);
-    std::cout << NumOfBoxes << std::endl;
+    std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
+    //std::vector<int> ori (NumOfBoxes*NumOfBoxes,0);
+    //orientation(ori, 0, NumOfBoxes*NumOfBoxes, 1);
+    orientat(RotationMap, NumOfBoxes, 0, 0, 0);
+    for(int i = 0; i < NumOfBoxes; i++){
+        for(int j = 0; j < NumOfBoxes; j++){
+            RotationMap[i][j] = RotationMap[i][j]%4;
+            std::cout << RotationMap[i][j];
+        }
+        std::cout << std::endl;
+    }
+    //std::cout << NumOfBoxes << std::endl;
     int smallsize = size/NumOfBoxes;
     int distance = (smallsize-2)/4; // Distances into the box
     int leftin = distance+1; // Left start point
@@ -45,12 +130,21 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     for(int a = 0; a < NumOfBoxes; a++){
         for(int b = 0; b < NumOfBoxes; b++){
             for(int i = distance; i <= basein; i++){
-                array[i+b*smallsize][rightin+a*smallsize] = 1; // Rigth line
-                array[i+b*smallsize][leftin+a*smallsize] = 1;  // Left Line
+                std::cout << RotationMap[a][b] << std::endl;
+                if(RotationMap[a][b] != 1){
+                    array[i+b*smallsize][rightin+a*smallsize] = 1; // Rigth line
+                }
+                if(RotationMap[a][b] != 3){
+                    array[i+b*smallsize][leftin+a*smallsize] = 1;  // Left Line
+                }
             }
             for(int j = leftin; j <= rightin; j++){
-                array[basein+a*smallsize][j+b*smallsize] = 1;     // Bottom Line
-                array[(basein/3)+a*smallsize][j+b*smallsize] = 1; // Top Line
+                if(RotationMap[a][b] != 2){
+                    array[basein+a*smallsize][j+b*smallsize] = 1;     // Bottom Line
+                }
+                if(RotationMap[a][b] != 0){
+                    array[(basein/3)+a*smallsize][j+b*smallsize] = 1; // Top Line
+                }
             }
             counter++;
         }
