@@ -3,9 +3,62 @@
 #include <fstream>
 #include <vector>
 #include <math.h>
+#include <cmath>
 
-void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int starthoriz, int startvert, int quad){
-    if(iterations == 1){
+void orientation(std::vector<int> &ori, int start, int size){
+    if(size == 1){
+        return;
+    }
+    int temp = size/4;
+    for(int i = start; i < temp; i++){
+        ori[i] = ori[i]-1;
+    }
+    for(int i = temp; i < 2*temp; i++){
+        ori[i] = ori[i]+1;
+    }
+    orientation(ori, 0, temp);
+    orientation(ori, temp, temp);
+    orientation(ori, 2*temp, temp);
+    orientation(ori, 3*temp, temp);
+}
+
+void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
+    int NumOfBoxes;
+    if(iterations == 2){
+        NumOfBoxes = 2;
+    }
+    else if(iterations > 2){
+        NumOfBoxes = pow(2,(iterations-1));
+    }
+    else{
+        NumOfBoxes = 1;
+    }
+    std::vector<int> ori (NumOfBoxes,0);
+    orientation(ori, 0, NumOfBoxes);
+    std::cout << NumOfBoxes << std::endl;
+    int smallsize = size/NumOfBoxes;
+    int distance = (smallsize-2)/4; // Distances into the box
+    int leftin = distance+1; // Left start point
+    int rightin = 3*distance+1; // Right start point
+    int basein = 3*distance+1;
+    int counter = 0;
+    for(int a = 0; a < NumOfBoxes; a++){
+        for(int b = 0; b < NumOfBoxes; b++){
+            for(int i = distance; i <= basein; i++){
+                array[i+b*smallsize][rightin+a*smallsize] = 1; // Rigth line
+                array[i+b*smallsize][leftin+a*smallsize] = 1;  // Left Line
+            }
+            for(int j = leftin; j <= rightin; j++){
+                array[basein+a*smallsize][j+b*smallsize] = 1;     // Bottom Line
+                array[(basein/3)+a*smallsize][j+b*smallsize] = 1; // Top Line
+            }
+            counter++;
+        }
+    }
+    
+    
+    
+    /*if(iterations == 1){
         int distance = (size-2)/4; // Set the distances from the sides of the square
         int leftin = distance+1+starthoriz; // Left start point
         int rightin = 3*distance+1+starthoriz; // Right start point
@@ -42,7 +95,7 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations, int
         hilbert(array, size/2, iterations-1, size/2, 0, 2);
         hilbert(array, size/2, iterations-1, 0, size/2, 3);
         hilbert(array, size/2, iterations-1, size/2, size/2, 4);
-    }
+    }*/
 }
 
 
@@ -59,7 +112,7 @@ int main(int argc, char** argv){
     }
     
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
-    hilbert(map, size, iterations, 0, 0, 0);
+    hilbert(map, size, iterations);
 
     // File output generation
     std::ofstream outfile (out_fname);
