@@ -26,11 +26,24 @@ void orientation(std::vector<int> &ori, int start, int size){
     }
 }
 
-void orientat(std::vector<std::vector<int>> &array1, int size, int rotation, int startX, int startY){
-    int temp = size/2;
-    if(size == 1){
+void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, int startX, int startY){
+    int temp = size2/2;
+    if(size2 == 1){
         return;
     }
+    
+    //Test to output
+    /*
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            std::cout << array1[i][j];
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "------------" << std::endl;
+    */
+
+
     rotation = rotation%4;
     if(rotation == 0){
         for(int i = startY; i < temp+startY; i++){
@@ -50,7 +63,7 @@ void orientat(std::vector<std::vector<int>> &array1, int size, int rotation, int
     }
     if(rotation == 1){
         for(int i = startY; i < temp+startY; i++){
-            for(int j = startX+temp; j < temp+2*startX; j++){
+            for(int j = startX+temp; j < temp*2+startX; j++){//ERROR IN BOUNDING CAUSING CRASH
                 array1[i][j] += 3;
             }
         }
@@ -59,10 +72,10 @@ void orientat(std::vector<std::vector<int>> &array1, int size, int rotation, int
                 array1[i][j] += 1;
             }
         }
-        orientat(array1, temp, rotation+3, startX, startY);
-        orientat(array1, temp, rotation+1, startX+temp, startY);
+        orientat(array1, temp, rotation, startX, startY);
+        orientat(array1, temp, rotation+3, startX+temp, startY);
         orientat(array1, temp, rotation, startX, startY+temp);
-        orientat(array1, temp, rotation, startX+temp, startY+temp);
+        orientat(array1, temp, rotation+1, startX+temp, startY+temp);
     }
     if(rotation == 2){
         for(int i = startY+temp; i < 2*temp+startY; i++){
@@ -75,10 +88,10 @@ void orientat(std::vector<std::vector<int>> &array1, int size, int rotation, int
                 array1[i][j] += 1;
             }
         }
-        orientat(array1, temp, rotation+3, startX, startY);
-        orientat(array1, temp, rotation+1, startX+temp, startY);
-        orientat(array1, temp, rotation, startX, startY+temp);
-        orientat(array1, temp, rotation, startX+temp, startY+temp);
+        orientat(array1, temp, rotation, startX, startY);
+        orientat(array1, temp, rotation, startX+temp, startY);
+        orientat(array1, temp, rotation+1, startX, startY+temp);
+        orientat(array1, temp, rotation+3, startX+temp, startY+temp);
     }
     if(rotation == 3){
         for(int i = startY+temp; i < temp*2+startY; i++){
@@ -91,9 +104,9 @@ void orientat(std::vector<std::vector<int>> &array1, int size, int rotation, int
                 array1[i][j] += 1;
             }
         }
-        orientat(array1, temp, rotation+3, startX, startY);
-        orientat(array1, temp, rotation+1, startX+temp, startY);
-        orientat(array1, temp, rotation, startX, startY+temp);
+        orientat(array1, temp, rotation+1, startX, startY);
+        orientat(array1, temp, rotation, startX+temp, startY);
+        orientat(array1, temp, rotation+3, startX, startY+temp);
         orientat(array1, temp, rotation, startX+temp, startY+temp);
     }
 }
@@ -187,12 +200,19 @@ int main(int argc, char** argv){
     outfile << "255" << std::endl;
     for(int i=0; i < size; i++){
         for(int j = 0; j < size; j++){
-            outfile << map[i][j]*100 << " " << 0 << " " << 0 << " "; 
+            if(map[i][j] == 0){
+                outfile << 255 << " " << 255 << " " << 255 << " ";
+            }
+            else{
+                outfile << map[i][j]*100 << " " << 0 << " " << 0 << " ";
+            } 
         }
         outfile << std::endl;
     }
-
     outfile.close();
+    std::cout << "ran" << std::endl;
+    
+    RotationMap.clear();
     
     //TEST TO OUTPUT 2D VECTOR
     /*for(double i=0; i < complete.size(); i++){
