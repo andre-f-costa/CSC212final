@@ -111,7 +111,7 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
     }
 }
 
-void hilbert(std::vector<std::vector<int>> &array, std::vector<std::vector<int>> &RotationMap, int size, int iterations){
+void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     int NumOfBoxes;
     if(iterations == 2){
         NumOfBoxes = 2;
@@ -122,7 +122,10 @@ void hilbert(std::vector<std::vector<int>> &array, std::vector<std::vector<int>>
     else{
         NumOfBoxes = 1;
     }
-    int check = NumOfBoxes;
+    // Create the empty vector to track rotations
+    std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
+    orientat(RotationMap, NumOfBoxes, 0, 0, 0);
+    
     //std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
     //std::vector<int> ori (NumOfBoxes*NumOfBoxes,0);
     //orientation(ori, 0, NumOfBoxes*NumOfBoxes, 1);
@@ -184,13 +187,12 @@ int main(int argc, char** argv){
         return 0;
     }
     
-    int NumOfBoxes = pow(2,(iterations-1));
-    std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
-    orientat(RotationMap, NumOfBoxes, 0, 0, 0);
+    //int NumOfBoxes = pow(2,(iterations-1));
+    
 
 
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
-    hilbert(map, RotationMap, size, iterations);
+    hilbert(map, size, iterations);
     std::cout << "here" << std::endl;
 
     // File output generation
@@ -212,7 +214,7 @@ int main(int argc, char** argv){
     outfile.close();
     std::cout << "ran" << std::endl;
     
-    RotationMap.clear();
+    //RotationMap.clear();
     
     //TEST TO OUTPUT 2D VECTOR
     /*for(double i=0; i < complete.size(); i++){
