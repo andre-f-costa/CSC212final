@@ -4,7 +4,7 @@
 #include <vector>
 #include <math.h>
 
-void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_start , int levels, int count_base, int count_diagonal, int level_count, std::vector<std::vector<int>> * level);
+void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_start , int levels, int count_base, int count_diagonal, int level_count, std::vector<std::vector<int>> * level, int base_row, int base_col);
 void set_base_triangle(std::vector<std::vector<int>> * grid, int row, int col, int &count_base, int &count_diagonal, std::vector<std::vector<int>> * level);
 
 int main(int argc, char** argv){
@@ -19,6 +19,8 @@ int main(int argc, char** argv){
 
     int count_base = 0;      //this will hold the length of the base of the equalateral triangle
     int count_diagonal = 0; //this will hold the length of the diagonals of the equalateral triangle
+    int base_row = 0;       //this will hold the base location row of the new triangle
+    int base_col = 0;       //this will hold the base location col of the new triangle
 
     set_base_triangle(&grid, row, col, count_base,count_diagonal, &level); // fill in grid with the base level triangle
 
@@ -33,9 +35,11 @@ int main(int argc, char** argv){
     std::cout << std::endl;*/
 
     int level_count = 1;
+    base_row = row/2;
+    base_col = row/4;
     //s_triangle divides count_base and count_diagonal to keep the length of the next recursive triangle which will be half the size of the previous one.
-    s_triangle(&grid, (row - (row/2)) - 1, (row/4) - 1, levels, (count_base/2), count_diagonal/2, level_count, &level);        //start recursion pass in the mid point of the left diagonal of the triangle
-    //s_triangle(&grid, row/2, row/4, levels, (count_base/2), count_diagonal/2, level_count, &level);        //start recursion pass in the mid point of the left diagonal of the triangle
+    //s_triangle(&grid, (row - (row/2)) - 1, (row/4) - 1, levels, (count_base/2), count_diagonal/2, level_count, &level);        //start recursion pass in the mid point of the left diagonal of the triangle
+    s_triangle(&grid, row/2, row/4, levels, (count_base/2), count_diagonal/2, level_count, &level, base_row, base_col);        //start recursion pass in the mid point of the left diagonal of the triangle
     std::ofstream outfile (out_file);        //output the file to a .ppm file
     outfile << "P3" << std::endl;
     outfile << row << " " << col << std::endl;
@@ -132,10 +136,8 @@ void set_base_triangle(std::vector<std::vector<int>> * grid, int row, int col, i
     count_base += 2;     // this will account for the two edges already occupied by a 1 on the corners of the equalateral triangle
 }
 
-void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_start , int levels, int count_base, int count_diagonal, int level_count, std::vector<std::vector<int>> * level){
-    //std::cout << count_base << " " << row_start << " " << col_start << std::endl;
+void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_start , int levels, int count_base, int count_diagonal, int level_count, std::vector<std::vector<int>> * level, int base_row, int base_col){
     if(level_count == levels){
-        //std::cout << "hello" << std::endl;
         return;
     }
     level_count ++;
@@ -170,7 +172,8 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     }
     std::cout << std::endl;*/
 
-    s_triangle(grid,row_start - (count_diagonal + 2), col_start - count_base + (count_base/4), levels, count_base/2, count_diagonal/2, level_count, level);  //start recursion on the lower left of the next level
+    //start recursion on the lower left of the next level
+    s_triangle(grid, base_row + (count_base/2), base_col - (count_base/4), levels, count_base/2, count_diagonal/2, level_count, level, base_row + (count_base/2), base_col - (count_base/4));
     count = 1;
     row_start -= 2;
     col_start++;
@@ -202,7 +205,8 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     }
     std::cout << std::endl;*/
 
-    s_triangle(grid,row_start + (count_diagonal) , col_start - ((count_base/4) + 2), levels, count_base/2, count_diagonal/2, level_count, level);  // start recursion on the lower right of the next level
+    // start recursion on the lower right of the next level
+    s_triangle(grid, base_row + (count_base/2) , (base_col + (count_base/2) + (count_base/4)), levels, count_base/2, count_diagonal/2, level_count, level, base_row + (count_base/2) , (base_col + (count_base/2) + (count_base/4)));
     if((*grid)[row_start][col_start]){
         col_start--;
     }
@@ -224,5 +228,7 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     }
     std::cout << std::endl;*/
 
-    s_triangle(grid,row_start - (count_diagonal) + 1, col_start + (count_base/4) , levels, count_base/2, count_diagonal/2, level_count, level);      //start recursion on the upper triangle of the next level
+    //start recursion on the upper triangle of the next level
+    s_triangle(grid,base_row - (count_base/2), base_col + (count_base/4) , levels, count_base/2, count_diagonal/2, level_count, level, base_row - (count_base/2), base_col + (count_base/4));
+
 }
