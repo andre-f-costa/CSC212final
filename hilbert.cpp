@@ -57,7 +57,7 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
                 array1[i][j] += 1;
             }
         }
-        output[1][1] = 2;
+        output[1][1] = 2; //
         /*for(int i = temp-edgesize/2; i < temp+edgesize/2; i++){
             output[i][startX+edgesize/2] = 2;
             output[i][startX+edgesize/2] = 2;
