@@ -103,7 +103,9 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
     int movein = totalwidth/tempsize;
     for(int j = 1; j < tempsize; j += 2){
         for(int i = 1; i < tempsize; i += 2){
+            std::cout << "1 ";
             int topleft = direction[i-1][j-1];
+
             int topright = direction[i-1][j];
             int botleft = direction[i][j-1];
             int botright = direction[i][j];
@@ -184,13 +186,13 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     //std::vector<int> ori (NumOfBoxes*NumOfBoxes,0);
     //orientation(ori, 0, NumOfBoxes*NumOfBoxes, 1);
     //orientat(RotationMap, NumOfBoxes, 0, 0, 0);
-    /*for(int i = 0; i < NumOfBoxes; i++){
+    for(int i = 0; i < NumOfBoxes; i++){
         for(int j = 0; j < NumOfBoxes; j++){
             RotationMap[i][j] = RotationMap[i][j]%4;
             std::cout << RotationMap[i][j];
         }
         std::cout << std::endl;
-    }*/
+    }
     //std::cout << NumOfBoxes << std::endl;
     
     int distance = (smallsize-2)/4; // Distances into the box
@@ -219,7 +221,7 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
             }
             counter++;
             if(counter == NumOfBoxes*NumOfBoxes){
-                 //std::cout << "test" << std::endl;
+                 std::cout << "test" << std::endl;
                     //RotationMap.clear();
             }
         }
@@ -247,7 +249,7 @@ int main(int argc, char** argv){
 
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
     hilbert(map, size, iterations);
-    //std::cout << "here" << std::endl;
+    std::cout << "here" << std::endl;
 
     // File output generation
     std::ofstream outfile (out_fname);
@@ -272,7 +274,7 @@ int main(int argc, char** argv){
         outfile << std::endl;
     }
     outfile.close();
-    //std::cout << "ran" << std::endl;
+    std::cout << "ran" << std::endl;
     
     //RotationMap.clear();
     
