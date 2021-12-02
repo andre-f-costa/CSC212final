@@ -103,9 +103,7 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
     int movein = totalwidth/tempsize;
     for(int j = 1; j < tempsize; j += 2){
         for(int i = 1; i < tempsize; i += 2){
-            std::cout << "1 ";
             int topleft = direction[i-1][j-1];
-            std::cout << "2 ";
             int topright = direction[i-1][j];
             int botleft = direction[i][j-1];
             int botright = direction[i][j];
@@ -120,19 +118,43 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
                 for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
                     output[i*movein+edgesize/2][k-1] = 2;
                 }
-
-    
             }
-            else{
-                temparray[i/2][j/2] = i*j;
+            else if(topleft == topright){
+                temparray[i/2][j/2] = 2;
+                for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
+                    output[k-2][(j-1)*movein+edgesize/2] = 3;
+                    output[k-2][(j+1)*movein-edgesize/2] = 3;
+                    
+                }
+                for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
+                    output[i*movein-edgesize/2][k-1] = 3;
+                }
             }
-
-
-
-
+            else if(topleft == botleft){
+                temparray[i/2][j/2] = 1;
+                for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
+                    output[(i-1)*movein+edgesize/2][k-2] = 2;
+                    output[(i+1)*movein-edgesize/2][k-2] = 2;
+                    
+                }
+                for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
+                    output[k-1][j*movein-edgesize/2] = 2;
+                }
+            }
+            else if(topright == botright){
+                temparray[i/2][j/2] = 1;
+                for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
+                    output[(i-1)*movein+edgesize/2][k-2] = 2;
+                    output[(i+1)*movein-edgesize/2][k-2] = 2;
+                    
+                }
+                for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
+                    output[k-1][j*movein+edgesize/2] = 2;
+                }
+            }
         }
     }
-    if(tempsize <= 1){
+    if(tempsize <= 2){
         return;
     }
     else{
@@ -162,13 +184,13 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     //std::vector<int> ori (NumOfBoxes*NumOfBoxes,0);
     //orientation(ori, 0, NumOfBoxes*NumOfBoxes, 1);
     //orientat(RotationMap, NumOfBoxes, 0, 0, 0);
-    for(int i = 0; i < NumOfBoxes; i++){
+    /*for(int i = 0; i < NumOfBoxes; i++){
         for(int j = 0; j < NumOfBoxes; j++){
             RotationMap[i][j] = RotationMap[i][j]%4;
             std::cout << RotationMap[i][j];
         }
         std::cout << std::endl;
-    }
+    }*/
     //std::cout << NumOfBoxes << std::endl;
     
     int distance = (smallsize-2)/4; // Distances into the box
@@ -197,7 +219,7 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
             }
             counter++;
             if(counter == NumOfBoxes*NumOfBoxes){
-                 std::cout << "test" << std::endl;
+                 //std::cout << "test" << std::endl;
                     //RotationMap.clear();
             }
         }
@@ -225,7 +247,7 @@ int main(int argc, char** argv){
 
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
     hilbert(map, size, iterations);
-    std::cout << "here" << std::endl;
+    //std::cout << "here" << std::endl;
 
     // File output generation
     std::ofstream outfile (out_fname);
@@ -240,6 +262,9 @@ int main(int argc, char** argv){
             else if(map[i][j] == 2){
                 outfile << 255 << " " << 0 << " " << 0 << " ";
             }
+            else if(map[i][j] == 3){
+                outfile << 0 << " " << 255 << " " << 0 << " ";
+            }
             else{
                 outfile << map[i][j]*100 << " " << 0 << " " << 0 << " ";
             } 
@@ -247,7 +272,7 @@ int main(int argc, char** argv){
         outfile << std::endl;
     }
     outfile.close();
-    std::cout << "ran" << std::endl;
+    //std::cout << "ran" << std::endl;
     
     //RotationMap.clear();
     
