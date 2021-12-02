@@ -103,9 +103,7 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
     int movein = totalwidth/tempsize;
     for(int j = 1; j < tempsize; j += 2){
         for(int i = 1; i < tempsize; i += 2){
-            std::cout << "1 ";
             int topleft = direction[i-1][j-1];
-
             int topright = direction[i-1][j];
             int botleft = direction[i][j-1];
             int botright = direction[i][j];
@@ -164,7 +162,7 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
     }
 }
 
-void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
+int hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     int NumOfBoxes;
     if(iterations == 2){
         NumOfBoxes = 2;
@@ -176,6 +174,7 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
         NumOfBoxes = 1;
     }
     int smallsize = size/NumOfBoxes;
+    size = NumOfBoxes*smallsize;
 
     // Create the empty vector to track rotations
     std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
@@ -189,9 +188,9 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     for(int i = 0; i < NumOfBoxes; i++){
         for(int j = 0; j < NumOfBoxes; j++){
             RotationMap[i][j] = RotationMap[i][j]%4;
-            std::cout << RotationMap[i][j];
+            //std::cout << RotationMap[i][j];
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
     //std::cout << NumOfBoxes << std::endl;
     
@@ -199,7 +198,6 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     int leftin = distance+1; // Left start point
     int rightin = 3*distance+1; // Right start point
     int basein = 3*distance+1;
-    int counter = 0;
     for(int a = 0; a < NumOfBoxes; a++){
         for(int b = 0; b < NumOfBoxes; b++){
             for(int i = distance; i <= basein; i++){
@@ -219,15 +217,10 @@ void hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
                     array[(basein/3)+a*smallsize][j+b*smallsize] = 1; // Top Line
                 }
             }
-            counter++;
-            if(counter == NumOfBoxes*NumOfBoxes){
-                 std::cout << "test" << std::endl;
-                    //RotationMap.clear();
-            }
         }
     }
     sidelines(array, smallsize/2, RotationMap, size);
-    return;
+    return size;
 }   
 
 
@@ -248,16 +241,15 @@ int main(int argc, char** argv){
 
 
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
-    hilbert(map, size, iterations);
-    std::cout << "here" << std::endl;
+    int outsize = hilbert(map, size, iterations);
 
     // File output generation
     std::ofstream outfile (out_fname);
     outfile << "P3" << std::endl;
-    outfile << size << " " << size << std::endl;
+    outfile << outsize << " " << outsize << std::endl;
     outfile << "255" << std::endl;
-    for(int i=0; i < size; i++){
-        for(int j = 0; j < size; j++){
+    for(int i=0; i < outsize; i++){
+        for(int j = 0; j < outsize; j++){
             if(map[i][j] == 0){
                 outfile << 255 << " " << 255 << " " << 255 << " ";
             }
@@ -274,7 +266,6 @@ int main(int argc, char** argv){
         outfile << std::endl;
     }
     outfile.close();
-    std::cout << "ran" << std::endl;
     
     //RotationMap.clear();
     
