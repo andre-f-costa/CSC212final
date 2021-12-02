@@ -98,7 +98,6 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
 
 void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<std::vector<int>> &direction, int totalwidth){
     int tempsize = direction[0].size();
-    edgesize += 1;
     std::vector<std::vector<int>> temparray (tempsize/2, (std::vector<int> (tempsize/2,-1)));
     int movein = totalwidth/tempsize;
     for(int j = 1; j < tempsize; j += 2){
@@ -111,41 +110,41 @@ void sidelines(std::vector<std::vector<int>> &output, int edgesize, std::vector<
             if(botleft == botright){
                 temparray[i/2][j/2] = 0;
                 for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
-                    output[k-2][(j-1)*movein+edgesize/2] = 2;
-                    output[k-2][(j+1)*movein-edgesize/2] = 2;
+                    output[k][(j-1)*movein+edgesize/2] = 2;
+                    output[k][(j+1)*movein-edgesize/2] = 2;
                     
                 }
                 for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
-                    output[i*movein+edgesize/2][k-1] = 2;
+                    output[i*movein+edgesize/2-1][k] = 2;
                 }
             }
             else if(topleft == topright){
                 temparray[i/2][j/2] = 2;
                 for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
-                    output[k-2][(j-1)*movein+edgesize/2] = 3;
-                    output[k-2][(j+1)*movein-edgesize/2] = 3;
+                    output[k][(j-1)*movein+edgesize/2] = 3;
+                    output[k][(j+1)*movein-edgesize/2] = 3;
                     
                 }
                 for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
-                    output[i*movein-edgesize/2][k-1] = 3;
+                    output[i*movein-edgesize/2][k] = 3;
                 }
             }
             else if(topleft == botleft){
                 temparray[i/2][j/2] = 1;
                 for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
-                    output[(i-1)*movein+edgesize/2][k-2] = 2;
-                    output[(i+1)*movein-edgesize/2][k-2] = 2;
+                    output[(i-1)*movein+edgesize/2-1][k] = 2;
+                    output[(i+1)*movein-edgesize/2][k] = 2;
                     
                 }
                 for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
-                    output[k-1][j*movein-edgesize/2] = 2;
+                    output[k][j*movein-edgesize/2] = 2;
                 }
             }
             else if(topright == botright){
                 temparray[i/2][j/2] = 1;
                 for(int k = j*movein-edgesize/2; k <= j*movein+edgesize/2; k++){
-                    output[(i-1)*movein+edgesize/2][k-2] = 2;
-                    output[(i+1)*movein-edgesize/2][k-2] = 2;
+                    output[(i-1)*movein+edgesize/2-1][k] = 2;
+                    output[(i+1)*movein-edgesize/2][k] = 2;
                     
                 }
                 for(int k = i*movein-edgesize/2; k <= i*movein+edgesize/2; k++){
