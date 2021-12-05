@@ -13,18 +13,21 @@ int main(int argc, char** argv){
     int levels = atoi(argv[3]);
     std::string out_file = argv[4];
 
+    double new_row = sqrt((pow(col,2) -pow((col/2),2)));
+    int row2 = new_row;
+
     std::vector<std::vector<int>> grid(row, std::vector<int> (col, 0)); // make and empty 2d array size x size of all zeros
 
     std::vector<std::vector<int>> level(row, std::vector<int> (col, 0));    //array to have a different color for each level
+
 
     int count_base = 0;      //this will hold the length of the base of the equalateral triangle
     int count_diagonal = 0; //this will hold the length of the diagonals of the equalateral triangle
     int base_row = 0;       //this will hold the base location row of the new triangle
     int base_col = 0;       //this will hold the base location col of the new triangle
 
-    set_base_triangle(&grid, row, col, count_base,count_diagonal, &level); // fill in grid with the base level triangle
+    set_base_triangle(&grid, row2, col, count_base,count_diagonal, &level); // fill in grid with the base level triangle
 
-    //std::cout << count_base << " " << count_diagonal << std::endl;
 
     /*for(int i = 0; i < grid.size(); i++){
         for(int j = 0; j < grid[i].size(); j++){
@@ -35,11 +38,11 @@ int main(int argc, char** argv){
     std::cout << std::endl;*/
 
     int level_count = 1;
-    base_row = row/2;
-    base_col = row/4;
+    base_row = row2/2;
+    base_col = row2/4;
     //s_triangle divides count_base and count_diagonal to keep the length of the next recursive triangle which will be half the size of the previous one.
     //s_triangle(&grid, (row - (row/2)) - 1, (row/4) - 1, levels, (count_base/2), count_diagonal/2, level_count, &level);        //start recursion pass in the mid point of the left diagonal of the triangle
-    s_triangle(&grid, row/2, row/4, levels, (count_base/2), count_diagonal/2, level_count, &level, base_row, base_col);        //start recursion pass in the mid point of the left diagonal of the triangle
+    s_triangle(&grid, row2/2, row2/4, levels, (count_base/2), count_diagonal/2, level_count, &level, base_row, base_col);        //start recursion pass in the mid point of the left diagonal of the triangle
     std::ofstream outfile (out_file);        //output the file to a .ppm file
     outfile << "P3" << std::endl;
     outfile << row << " " << col << std::endl;
@@ -140,11 +143,13 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     if(level_count == levels){
         return;
     }
+
+
     level_count ++;
     row_start += 2;             //increment to start at the first 0 point to be filled in
     col_start ++;
     int count = 1;
-    int count_temp = count_diagonal;        //this will be used to drive the drawing of the recursive fractal base
+    int count_temp = count_base/2;        //this will be used to drive the drawing of the recursive fractal base
     while(count_temp){                //create the diagonal downward branch of the triangle
         (*grid)[row_start][col_start] = 1;
         (*level)[row_start][col_start] = level_count;
@@ -177,7 +182,7 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     count = 1;
     row_start -= 2;
     col_start++;
-    count_temp = count_diagonal;
+    count_temp = count_base/2;
     while(count_temp){                //create the diagonal upward branch of the triangle
         (*grid)[row_start][col_start] = 1;
         (*level)[row_start][col_start] = level_count;
