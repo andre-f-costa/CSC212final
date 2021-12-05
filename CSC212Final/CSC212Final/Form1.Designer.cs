@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecursiveImaging));
             this.button1 = new System.Windows.Forms.Button();
             this.txt_output = new System.Windows.Forms.TextBox();
             this.txt_iterations = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.txt_prog = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -66,7 +68,7 @@
             // txt_iterations
             // 
             this.txt_iterations.ForeColor = System.Drawing.Color.Black;
-            this.txt_iterations.Location = new System.Drawing.Point(45, 188);
+            this.txt_iterations.Location = new System.Drawing.Point(45, 289);
             this.txt_iterations.Name = "txt_iterations";
             this.txt_iterations.Size = new System.Drawing.Size(120, 20);
             this.txt_iterations.TabIndex = 3;
@@ -85,7 +87,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(42, 172);
+            this.label2.Location = new System.Drawing.Point(42, 273);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 5;
@@ -96,7 +98,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(42, 287);
+            this.label3.Location = new System.Drawing.Point(42, 173);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 6;
@@ -118,7 +120,7 @@
             // 
             this.btn_hil.AutoSize = true;
             this.btn_hil.ForeColor = System.Drawing.Color.White;
-            this.btn_hil.Location = new System.Drawing.Point(45, 303);
+            this.btn_hil.Location = new System.Drawing.Point(45, 189);
             this.btn_hil.Name = "btn_hil";
             this.btn_hil.Size = new System.Drawing.Size(86, 17);
             this.btn_hil.TabIndex = 8;
@@ -131,7 +133,7 @@
             // 
             this.btn_ser.AutoSize = true;
             this.btn_ser.ForeColor = System.Drawing.Color.White;
-            this.btn_ser.Location = new System.Drawing.Point(45, 326);
+            this.btn_ser.Location = new System.Drawing.Point(45, 212);
             this.btn_ser.Name = "btn_ser";
             this.btn_ser.Size = new System.Drawing.Size(109, 17);
             this.btn_ser.TabIndex = 9;
@@ -144,7 +146,7 @@
             // 
             this.btn_koch.AutoSize = true;
             this.btn_koch.ForeColor = System.Drawing.Color.White;
-            this.btn_koch.Location = new System.Drawing.Point(45, 349);
+            this.btn_koch.Location = new System.Drawing.Point(45, 235);
             this.btn_koch.Name = "btn_koch";
             this.btn_koch.Size = new System.Drawing.Size(91, 17);
             this.btn_koch.TabIndex = 10;
@@ -155,7 +157,7 @@
             // 
             // txt_size
             // 
-            this.txt_size.Location = new System.Drawing.Point(45, 247);
+            this.txt_size.Location = new System.Drawing.Point(45, 348);
             this.txt_size.Name = "txt_size";
             this.txt_size.Size = new System.Drawing.Size(100, 20);
             this.txt_size.TabIndex = 11;
@@ -165,7 +167,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(42, 231);
+            this.label5.Location = new System.Drawing.Point(42, 332);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 12;
@@ -191,6 +193,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(341, 51);
             this.label7.Name = "label7";
@@ -198,12 +201,24 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Please start all file locations with /mnt";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(467, 402);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 12);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "André Costa, Fall 2021";
+            // 
             // RecursiveImaging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(100)))));
+            this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(578, 423);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txt_prog);
@@ -219,8 +234,10 @@
             this.Controls.Add(this.txt_iterations);
             this.Controls.Add(this.txt_output);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RecursiveImaging";
-            this.Text = "Form1";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Text = "Recursive Imaging";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -244,6 +261,7 @@
         private System.Windows.Forms.TextBox txt_prog;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

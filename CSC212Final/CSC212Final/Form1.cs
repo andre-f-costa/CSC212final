@@ -55,6 +55,10 @@ namespace CSC212Final
             {
                 btn_ser.Checked = false;
                 btn_koch.Checked = false;
+                txt_iterations.Enabled = true;
+                txt_size.Enabled = true;
+                txt_iterations.BackColor = Color.White;
+                txt_size.BackColor = Color.White;
             }
         }
 
@@ -64,12 +68,26 @@ namespace CSC212Final
             {
                 btn_hil.Checked = false;
                 btn_koch.Checked = false;
+                txt_iterations.Enabled = true;
+                txt_size.Enabled = true;
+                txt_iterations.BackColor = Color.White;
+                txt_size.BackColor = Color.White;
             }
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-
+            if(btn_koch.Checked == true)
+            {
+                btn_hil.Checked = false;
+                btn_ser.Checked = false;
+                txt_iterations.Enabled = false;
+                txt_size.Enabled = false;
+                txt_iterations.BackColor = Color.Gray;
+                txt_size.BackColor = Color.Gray;
+                txt_size.Text = null;
+                txt_iterations.Text = null;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -109,7 +127,7 @@ namespace CSC212Final
                     {
                         if (sw.BaseStream.CanWrite)
                         {
-                            sw.WriteLine(prog + " " + output + " " + txt_size.Text + " " + txt_iterations.Text);
+                            sw.WriteLine(prog + " " + output);
                         }
                     }
                 }
@@ -129,7 +147,7 @@ namespace CSC212Final
                     {
                         if (sw.BaseStream.CanWrite)
                         {
-                            sw.WriteLine(prog + " " + output + " " + txt_size.Text + " " + txt_iterations.Text);
+                            sw.WriteLine(prog + " " + txt_size.Text + " " + txt_size.Text + " " + txt_iterations.Text + " " + output + " ");
                         }
                     }
                 }
