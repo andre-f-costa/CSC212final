@@ -44,7 +44,7 @@ int main(int argc, char** argv){
                    outfile << grid[i][j]*255 << " " << 0 << " " << 0 << " ";
                 }
                 else if(level[i][j] % 4 == 1){
-                    outfile << 0 << " " << grid[i][j]*255 << " " << 0 << " ";
+                    outfile << 0 << " " << grid[i][j]*100 << " " << 0 << " ";
                 }
                 else if(level[i][j] % 4 == 2){
                     outfile << 0 << " " << 0 << " " << grid[i][j]*255 << " ";
@@ -119,6 +119,8 @@ void set_base_triangle(std::vector<std::vector<int>> * grid, int row, int col, i
     j = 1;
     while(!(*grid)[i][j]){              //create the base of the triangle
         (*grid)[i][j] = 1;
+        (*grid)[i + 1][j] = 1;  //fill out the base more
+        (*level)[i + 1][j] = 1;
         (*level)[i][j] = 1;
         j ++;
         count_base++;
@@ -185,6 +187,8 @@ void s_triangle(std::vector<std::vector<int>> * grid, int row_start, int col_sta
     count_temp = count_base;
     while(count_temp){                //create the branch across the triangle
         (*grid)[row_start][col_start] = 1;
+        (*grid)[row_start + 1][col_start] = 1;  //fill out the base of the triangle more by adding another row of pixels
+        (*level)[row_start + 1][col_start] = level_count;
         (*level)[row_start][col_start] = level_count;
         col_start--;
         count_temp--;
