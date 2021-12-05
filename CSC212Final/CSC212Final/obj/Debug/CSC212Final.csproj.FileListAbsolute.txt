@@ -1,0 +1,11 @@
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\bin\Debug\CSC212Final.exe.config
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\bin\Debug\CSC212Final.exe
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\bin\Debug\CSC212Final.pdb
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.csproj.AssemblyReference.cache
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.csproj.SuggestedBindingRedirects.cache
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.RecursiveImaging.resources
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.Properties.Resources.resources
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.csproj.GenerateResource.cache
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.csproj.CoreCompileInputs.cache
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.exe
+C:\CompSci\CSC212final\CSC212Final\CSC212Final\obj\Debug\CSC212Final.pdb
