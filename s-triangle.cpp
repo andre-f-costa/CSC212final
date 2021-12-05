@@ -40,19 +40,17 @@ int main(int argc, char** argv){
     for(int i=0; i < row; i++){
         for(int j = 0; j < col; j++){
             if(grid[i][j]){
-                if(level[i][j] < 3){
-                   outfile << grid[i][j]*level[i][j]*100 << " " << 0 << " " << 0 << " ";
+                if(level[i][j] % 4 == 0){
+                   outfile << grid[i][j]*255 << " " << 0 << " " << 0 << " ";
                 }
-                else if(level[i][j] < 6){
-                    int level_num = level[i][j]/3;
-                    outfile << 0 << " " << grid[i][j]*level_num*100 << " " << 0 << " ";
-                }
-                else if(level[i][j] < 9){
-                    int level_num = level[i][j]/3;
-                    outfile << 0 << " " << 0 << " " << grid[i][j]*level_num*100 << " ";
-                }
-                else{
+                else if(level[i][j] % 4 == 1){
                     outfile << 0 << " " << grid[i][j]*255 << " " << 0 << " ";
+                }
+                else if(level[i][j] % 4 == 2){
+                    outfile << 0 << " " << 0 << " " << grid[i][j]*255 << " ";
+                }
+                else if(level[i][j] % 4 == 3){
+                    outfile << 0 << " " << 0 << " " << 0 << " ";
                 }
             }
             else{
