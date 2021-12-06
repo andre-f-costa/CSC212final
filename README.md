@@ -10,8 +10,11 @@ On when calling hilbert, call with output file name, size and number of iteratio
 The above call will create a file called testoutput.ppm, of size 1000x1000 with 3 iterations of the hilbert curve.
 
 ## Koch triangle
-### Note
-When running, run with Clmg.h and Cturtle in the same folder. That is all!
+### Note 
+When running, run with Clmg.h and Cturtle in the same folder. To run, use powershell and enter the following command:
+>g++ koch.cpp -o koch -mwindows
+>
+That is all! 
 
 ## Sierpinski triangle
 ### Note
