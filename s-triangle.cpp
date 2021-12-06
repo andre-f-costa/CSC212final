@@ -30,8 +30,7 @@ int main(int argc, char** argv){
     int level_count = 1;
     base_row = row2/2;
     base_col = row2/4;
-    //s_triangle divides count_base and count_diagonal to keep the length of the next recursive triangle which will be half the size of the previous one.
-    //s_triangle(&grid, (row - (row/2)) - 1, (row/4) - 1, levels, (count_base/2), count_diagonal/2, level_count, &level);        //start recursion pass in the mid point of the left diagonal of the triangle
+    //s_triangle divides count_base to keep the length of the next recursive triangle which will be half the size of the previous one.
     s_triangle(&grid, row2/2, row2/4, levels, (count_base/2), level_count, &level, base_row, base_col);        //start recursion pass in the mid point of the left diagonal of the triangle
     std::ofstream outfile (out_file);        //output the file to a .ppm file
     outfile << "P3" << std::endl;
