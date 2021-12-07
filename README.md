@@ -9,7 +9,8 @@ and Ubuntu subsystem installed on your PC. If creating anything besides the Koch
 file following the linux file format with "/mnt/" at the start.
 >Example "/mnt/c/CSC/project/testimages/test.ppm"
 >
-The above would create a file called "test.ppm" inside of the testimages folder. 
+The above would create a file called "test.ppm" inside of the testimages folder. The GUI also will automatically open the outputted file for anything besides
+the Koch triangle. In order to do this properly, your computer must have something to handle .ppm files. In our testing, GIMP worked best. 
 
 ## Hilbert curves
 ### Note
