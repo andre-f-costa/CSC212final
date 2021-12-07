@@ -181,6 +181,7 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
+                    txt_prog.Text = prog;
                 }
                 else if (btn_koch.Checked == true)
                 {
@@ -204,6 +205,7 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
+                    txt_prog.Text = prog;
                 }
                 else if (btn_ser.Checked == true)
                 {
@@ -227,6 +229,7 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
+                    txt_prog.Text = prog;
                 }
                 else if (btn_carp.Checked == true)
                 {
@@ -250,6 +253,7 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
+                    txt_prog.Text = prog;
                 }
                 //string prog = txt_prog.Text;
                 string output = txt_output.Text;
@@ -268,7 +272,7 @@ namespace CSC212Final
                     {
                         if (sw.BaseStream.CanWrite)
                         {
-                            sw.WriteLine(prog + " " + output);
+                            sw.WriteLine(prog + " " + output + " " + txt_size.Text + " " + txt_iterations.Text);
                         }
                     }
                 }
@@ -278,7 +282,7 @@ namespace CSC212Final
                     {
                         if (sw.BaseStream.CanWrite)
                         {
-                            sw.WriteLine(prog + " " + output + " " + txt_size.Text + " " + txt_iterations.Text);
+                            sw.WriteLine(prog + " " + output);
                         }
                     }
                 }
@@ -289,6 +293,16 @@ namespace CSC212Final
                         if (sw.BaseStream.CanWrite)
                         {
                             sw.WriteLine(prog + " " + txt_size.Text + " " + txt_size.Text + " " + txt_iterations.Text + " " + output + " ");
+                        }
+                    }
+                }
+                else if (btn_carp.Checked == true)
+                {
+                    using (StreamWriter sw = p.StandardInput)
+                    {
+                        if (sw.BaseStream.CanWrite)
+                        {
+                            sw.WriteLine(prog + " " + txt_size.Text + " " + txt_iterations.Text + " " + output + " ");
                         }
                     }
                 }
