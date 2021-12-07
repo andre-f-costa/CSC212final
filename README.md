@@ -2,6 +2,14 @@
 ## FALL 2021 URI
 Recursive imaging.
 
+## Graphical User Interface
+### Note
+The GUI is an executable, all it needs is that it is in the same folder as the object files for the 4 image types on your C drive. If creating anything besides the Koch
+Triangle, you must give an output location for a .ppm file following the linux file format with "/mnt/" at the start.
+>Example "/mnt/c/CSC/project/testimages/test.ppm"
+>
+The above would create a file called "test.ppm" inside of the testimages folder. 
+
 ## Hilbert curves
 ### Note
 On when calling hilbert, call with output file name, size and number of iterations. Hilbert has a maximum output size of 10,000x10,000.

@@ -282,7 +282,7 @@ namespace CSC212Final
                     {
                         if (sw.BaseStream.CanWrite)
                         {
-                            sw.WriteLine(prog + " " + output);
+                            sw.WriteLine(prog);
                         }
                     }
                 }

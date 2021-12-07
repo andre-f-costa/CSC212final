@@ -145,10 +145,10 @@
             this.btn_ser.Location = new System.Drawing.Point(142, 603);
             this.btn_ser.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.btn_ser.Name = "btn_ser";
-            this.btn_ser.Size = new System.Drawing.Size(317, 41);
+            this.btn_ser.Size = new System.Drawing.Size(324, 41);
             this.btn_ser.TabIndex = 9;
             this.btn_ser.TabStop = true;
-            this.btn_ser.Text = "Serpinski Triangle";
+            this.btn_ser.Text = "Sierpinski Triangle";
             this.btn_ser.UseVisualStyleBackColor = true;
             this.btn_ser.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
@@ -210,12 +210,12 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(1080, 145);
+            this.label7.Location = new System.Drawing.Point(705, 314);
             this.label7.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(558, 38);
+            this.label7.Size = new System.Drawing.Size(945, 38);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Please start all file locations with /mnt";
+            this.label7.Text = "Please input file location following Linux format starting with /mnt";
             // 
             // label8
             // 
@@ -236,10 +236,10 @@
             this.btn_carp.Location = new System.Drawing.Point(142, 662);
             this.btn_carp.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.btn_carp.Name = "btn_carp";
-            this.btn_carp.Size = new System.Drawing.Size(200, 41);
+            this.btn_carp.Size = new System.Drawing.Size(304, 41);
             this.btn_carp.TabIndex = 17;
             this.btn_carp.TabStop = true;
-            this.btn_carp.Text = "Serp carp";
+            this.btn_carp.Text = "Sierpinski Carpet";
             this.btn_carp.UseVisualStyleBackColor = true;
             // 
             // RecursiveImaging
