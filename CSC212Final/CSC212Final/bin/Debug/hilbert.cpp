@@ -252,14 +252,15 @@ int main(int argc, char** argv){
             if(map[i][j] == 0){
                 outfile << 255 << " " << 255 << " " << 255 << " ";
             }
+            /*
             else if(map[i][j] == 2){
                 outfile << 255 << " " << 0 << " " << 0 << " ";
             }
             else if(map[i][j] == 3){
                 outfile << 0 << " " << 255 << " " << 0 << " ";
-            }
+            }*/
             else{
-                outfile << map[i][j]*100 << " " << 0 << " " << 0 << " ";
+                outfile << 2*100 << " " << 0 << " " << 0 << " ";
             } 
         }
         outfile << std::endl;
