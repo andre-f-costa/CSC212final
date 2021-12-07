@@ -45,6 +45,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btn_carp = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // button1
@@ -212,12 +213,25 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "André Costa, Fall 2021";
             // 
+            // btn_carp
+            // 
+            this.btn_carp.AutoSize = true;
+            this.btn_carp.ForeColor = System.Drawing.Color.White;
+            this.btn_carp.Location = new System.Drawing.Point(235, 237);
+            this.btn_carp.Name = "btn_carp";
+            this.btn_carp.Size = new System.Drawing.Size(71, 17);
+            this.btn_carp.TabIndex = 17;
+            this.btn_carp.TabStop = true;
+            this.btn_carp.Text = "Serp carp";
+            this.btn_carp.UseVisualStyleBackColor = true;
+            // 
             // RecursiveImaging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(578, 423);
+            this.Controls.Add(this.btn_carp);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -262,6 +276,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton btn_carp;
     }
 }
 
