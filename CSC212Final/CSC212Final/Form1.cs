@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace CSC212Final
 {
@@ -305,6 +306,21 @@ namespace CSC212Final
                             sw.WriteLine(prog + " " + txt_size.Text + " " + txt_iterations.Text + " " + output + " ");
                         }
                     }
+                }
+                if(btn_koch.Checked == false)
+                {
+                    string open = "/C C:";
+                    char[] outt = txt_output.Text.ToCharArray();
+
+                    for (int i = 6; i < outt.Length; i++)
+                    {
+                        if (outt[i] == '/')
+                        {
+                            outt[i] = (char)92;
+                        }
+                        open += outt[i];
+                    }
+                    System.Diagnostics.Process.Start("CMD.exe", open);
                 }
             }
         }
