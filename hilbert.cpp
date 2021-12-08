@@ -11,20 +11,8 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
     if(size2 == 1){
         return;
     }
-    
-    //Test to output
-    /*
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            std::cout << array1[i][j];
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "------------" << std::endl;
-    */
 
-
-    rotation = rotation%4;
+    rotation = rotation%4; //Mod the rotation value so it is always between 0 and 3
     if(rotation == 0){
         for(int i = startY; i < temp+startY; i++){
             for(int j = startX; j < temp+startX; j++){
@@ -37,10 +25,6 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
             }
         }
         output[1][1] = 2;
-        /*for(int i = multiplier*temp-edgesize/2; i < multiplier*temp+edgesize/2; i++){
-            output[i][startX*multiplier+edgesize/2] = 2;
-            output[i][(startX+2*temp)*multiplier-edgesize/2] = 2;
-        }*/
         orientat(array1, temp, rotation+3, startX, startY, output, edgesize, multiplier);
         orientat(array1, temp, rotation+1, startX+temp, startY, output, edgesize, multiplier);
         orientat(array1, temp, rotation, startX, startY+temp, output, edgesize, multiplier);
@@ -48,7 +32,7 @@ void orientat(std::vector<std::vector<int>> &array1, int size2, int rotation, in
     }
     if(rotation == 1){
         for(int i = startY; i < temp+startY; i++){
-            for(int j = startX+temp; j < temp*2+startX; j++){//ERROR IN BOUNDING CAUSING CRASH
+            for(int j = startX+temp; j < temp*2+startX; j++){
                 array1[i][j] += 3;
             }
         }
@@ -179,19 +163,11 @@ int hilbert(std::vector<std::vector<int>> &array, int size, int iterations){
     std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
     orientat(RotationMap, NumOfBoxes, 0, 0, 0, array, smallsize/2, size/NumOfBoxes);
     
-
-    //std::vector<std::vector<int>> RotationMap (NumOfBoxes, (std::vector<int> (NumOfBoxes,0)));
-    //std::vector<int> ori (NumOfBoxes*NumOfBoxes,0);
-    //orientation(ori, 0, NumOfBoxes*NumOfBoxes, 1);
-    //orientat(RotationMap, NumOfBoxes, 0, 0, 0);
     for(int i = 0; i < NumOfBoxes; i++){
         for(int j = 0; j < NumOfBoxes; j++){
             RotationMap[i][j] = RotationMap[i][j]%4;
-            //std::cout << RotationMap[i][j];
         }
-        //std::cout << std::endl;
     }
-    //std::cout << NumOfBoxes << std::endl;
     
     int distance = (smallsize-2)/4; // Distances into the box
     int leftin = distance+1; // Left start point
@@ -234,10 +210,6 @@ int main(int argc, char** argv){
         std::cout << "Size is too large, try again with a value <= 10,000!" << std::endl;
         return 0;
     }
-    
-    //int NumOfBoxes = pow(2,(iterations-1));
-    
-
 
     std::vector<std::vector<int>> map (size, (std::vector<int> (size,0))); // Create a square array filled with 0's
     int outsize = hilbert(map, size, iterations);
@@ -252,13 +224,6 @@ int main(int argc, char** argv){
             if(map[i][j] == 0){
                 outfile << 255 << " " << 255 << " " << 255 << " ";
             }
-            /*
-            else if(map[i][j] == 2){
-                outfile << 255 << " " << 0 << " " << 0 << " ";
-            }
-            else if(map[i][j] == 3){
-                outfile << 0 << " " << 255 << " " << 0 << " ";
-            }*/
             else{
                 outfile << 2*100 << " " << 0 << " " << 0 << " ";
             } 
@@ -266,16 +231,6 @@ int main(int argc, char** argv){
         outfile << std::endl;
     }
     outfile.close();
-    
-    //RotationMap.clear();
-    
-    //TEST TO OUTPUT 2D VECTOR
-    /*for(double i=0; i < complete.size(); i++){
-    for(double j = 0; j < complete[i].size(); j++){
-        std::cout << complete[i][j] <<" ";
-    }
-        std::cout << std::endl;
-    }*/
     
     return 0;
 }
