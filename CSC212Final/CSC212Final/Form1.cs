@@ -110,7 +110,7 @@ namespace CSC212Final
         string prog;
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Int32.Parse(txt_size.Text) > 10000 && btn_hil.Checked == true)
+            if (btn_hil.Checked == true && Int32.Parse(txt_size.Text) > 10000)
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
                 string message = "For Hilbert curve you cannot have a size value greater than 10,000. Please try again with a value less than 10,000.";
@@ -126,7 +126,7 @@ namespace CSC212Final
                     this.Close();
                 }
             }
-            else if ((Int32.Parse(txt_size.Text) > 4000 || Int32.Parse(txt_size.Text) < 2500 || Int32.Parse(txt_iterations.Text) > 9) && btn_ser.Checked == true)
+            else if (btn_ser.Checked == true && (Int32.Parse(txt_size.Text) > 4000 || Int32.Parse(txt_size.Text) < 2500 || Int32.Parse(txt_iterations.Text) > 9))
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
                 if (Int32.Parse(txt_iterations.Text) > 9)
@@ -164,30 +164,6 @@ namespace CSC212Final
                 {
                     //get string name
                     string fileName = "hilbert";
-                    string fullPath = Path.GetFullPath(fileName);
-                    prog = "/mnt/";
-                    char[] characters = fullPath.ToCharArray();
-                    for (int i = 0; i < characters.Length; i++)
-                    {
-                        if (i == 0)
-                        {
-                            characters[0] = 'c';
-                        }
-                        if (characters[i] == (char)92)
-                        {
-                            characters[i] = '/';
-                        }
-                        if (characters[i] != ':')
-                        {
-                            prog = prog + characters[i];
-                        }
-                    }
-                    txt_prog.Text = prog;
-                }
-                else if (btn_koch.Checked == true)
-                {
-                    //get string name
-                    string fileName = "koch";
                     string fullPath = Path.GetFullPath(fileName);
                     prog = "/mnt/";
                     char[] characters = fullPath.ToCharArray();
@@ -256,17 +232,18 @@ namespace CSC212Final
                     }
                     txt_prog.Text = prog;
                 }
-                //string prog = txt_prog.Text;
-                string output = txt_output.Text;
-                Process p = new Process();
-                ProcessStartInfo info = new ProcessStartInfo();
-                info.FileName = "ubuntu.exe";
-                info.RedirectStandardInput = true;
-                info.UseShellExecute = false;
-
-                p.StartInfo = info;
-                p.Start();
-
+                
+                    string output = txt_output.Text;
+                    Process p = new Process();
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.FileName = "ubuntu.exe";
+                    info.RedirectStandardInput = true;
+                    info.UseShellExecute = false;
+                if (btn_koch.Checked == false)
+                {
+                    p.StartInfo = info;
+                    p.Start();
+                }
                 if (btn_hil.Checked == true)
                 {
                     using (StreamWriter sw = p.StandardInput)
@@ -279,13 +256,9 @@ namespace CSC212Final
                 }
                 else if (btn_koch.Checked == true)
                 {
-                    using (StreamWriter sw = p.StandardInput)
-                    {
-                        if (sw.BaseStream.CanWrite)
-                        {
-                            sw.WriteLine(prog);
-                        }
-                    }
+                    string kochsnow = Path.GetFullPath("koch.exe");
+                    kochsnow = "/C " + kochsnow;
+                    System.Diagnostics.Process.Start("CMD.exe", kochsnow);
                 }
                 else if (btn_ser.Checked == true)
                 {
@@ -307,7 +280,7 @@ namespace CSC212Final
                         }
                     }
                 }
-                if(btn_koch.Checked == false)
+                if(btn_koch.Checked == false)//Opens output for everything but Koch
                 {
                     string open = "/C C:";
                     char[] outt = txt_output.Text.ToCharArray();
