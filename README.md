@@ -4,13 +4,14 @@ Recursive imaging.
 
 ## Graphical User Interface
 ### Note
-The GUI is an executable, all it needs is that it is in the same folder as the object files for the 4 image types on your C drive. It also requires that you have
+The GUI is an executable, all it needs is that it is in the same folder as the object files for the 3 image types on your C drive. It also requires that you have
 and Ubuntu subsystem installed on your PC. If creating anything besides the Koch Triangle, you must give an output location for a .ppm 
 file following the linux file format with "/mnt/" at the start.
 >Example "/mnt/c/CSC/project/testimages/test.ppm"
 >
 The above would create a file called "test.ppm" inside of the testimages folder. The GUI also will automatically open the outputted file for anything besides
-the Koch triangle. In order to do this properly, your computer must have something to handle .ppm files. In our testing, GIMP worked best. 
+the Koch triangle. In order to do this properly, your computer must have something to handle .ppm files. In our testing, GIMP worked best. Everything you need to run it
+can be found in the FinalSolution.zip file.
 
 ## Hilbert curves
 ### Note
