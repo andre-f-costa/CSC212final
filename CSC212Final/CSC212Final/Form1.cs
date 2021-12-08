@@ -55,7 +55,6 @@ namespace CSC212Final
             if (btn_hil.Checked == true)
             {
                 btn_ser.Checked = false;
-                btn_koch.Checked = false;
                 btn_carp.Checked = false;
                 txt_iterations.Enabled = true;
                 txt_size.Enabled = true;
@@ -70,7 +69,6 @@ namespace CSC212Final
             if (btn_ser.Checked == true)
             {
                 btn_hil.Checked = false;
-                btn_koch.Checked = false;
                 btn_carp.Checked = false;
                 txt_iterations.Enabled = true;
                 txt_size.Enabled = true;
@@ -79,27 +77,11 @@ namespace CSC212Final
             }
         }
 
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (btn_koch.Checked == true)
-            {
-                btn_hil.Checked = false;
-                btn_ser.Checked = false;
-                btn_carp.Checked = false;
-                txt_iterations.Enabled = false;
-                txt_size.Enabled = false;
-                txt_iterations.BackColor = Color.Gray;
-                txt_size.BackColor = Color.Gray;
-                txt_size.Text = null;
-                txt_iterations.Text = null;
-            }
-        }
         private void btn_carp_CheckedChanged(object sender, EventArgs e)
         {
             if (btn_carp.Checked == true)
             {
                 btn_hil.Checked = false;
-                btn_koch.Checked = false;
                 btn_ser.Checked = false;
                 txt_iterations.Enabled = true;
                 txt_size.Enabled = true;
@@ -182,7 +164,6 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
-                    txt_prog.Text = prog;
                 }
                 else if (btn_ser.Checked == true)
                 {
@@ -206,7 +187,6 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
-                    txt_prog.Text = prog;
                 }
                 else if (btn_carp.Checked == true)
                 {
@@ -230,7 +210,6 @@ namespace CSC212Final
                             prog = prog + characters[i];
                         }
                     }
-                    txt_prog.Text = prog;
                 }
                 
                     string output = txt_output.Text;
@@ -239,11 +218,9 @@ namespace CSC212Final
                     info.FileName = "ubuntu.exe";
                     info.RedirectStandardInput = true;
                     info.UseShellExecute = false;
-                if (btn_koch.Checked == false)
-                {
                     p.StartInfo = info;
                     p.Start();
-                }
+              
                 if (btn_hil.Checked == true)
                 {
                     using (StreamWriter sw = p.StandardInput)
@@ -254,12 +231,13 @@ namespace CSC212Final
                         }
                     }
                 }
-                else if (btn_koch.Checked == true)
+                /*else if (btn_koch.Checked == true)
                 {
                     string kochsnow = Path.GetFullPath("koch.exe");
                     kochsnow = "/C " + kochsnow;
+                    txt_prog.Text = kochsnow;
                     System.Diagnostics.Process.Start("CMD.exe", kochsnow);
-                }
+                }*/
                 else if (btn_ser.Checked == true)
                 {
                     using (StreamWriter sw = p.StandardInput)
@@ -280,8 +258,8 @@ namespace CSC212Final
                         }
                     }
                 }
-                if(btn_koch.Checked == false)//Opens output for everything but Koch
-                {
+                //Opens output for everything but Koch
+                
                     string open = "/C C:";
                     char[] outt = txt_output.Text.ToCharArray();
 
@@ -294,7 +272,7 @@ namespace CSC212Final
                         open += outt[i];
                     }
                     System.Diagnostics.Process.Start("CMD.exe", open);
-                }
+                
             }
         }
 
