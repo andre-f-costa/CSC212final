@@ -29,8 +29,8 @@ void koch(double length, double level, ct::Turtle& turtle, vector<string>* color
     return;
 }
 
-int main() { 
-    double level = 5; //how deep we go in the recursion.
+int main(int argc, char *argv[]) { 
+    double level = (int)atoi (argv[1]); //how deep we go in the recursion.
     double size = 500; //size of koch triangle
 
     vector<string> color{"violet", "purple", "blue", "green", "yellow", "orange", "red"};
