@@ -23,7 +23,10 @@ The above call will create a file called testoutput.ppm, of size 1000x1000 with 
 ## Koch triangle
 ### Note 
 When running, run with Clmg.h and Cturtle in the same folder. To run, use powershell and enter the following command:
->g++ koch.cpp -o koch -mwindows
+>Example: "g++ koch.cpp -o koch -mwindows"
+>
+When calling koch, the only input variable is depth. 
+>Example: "./koch 3"
 >
 That is all! 
 
